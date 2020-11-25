@@ -55,10 +55,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\CameraController.cs" />
-     <Compile Include="Assets\EnemyAI.cs" />
-     <Compile Include="Assets\EnemyGFX.cs" />
      <Compile Include="Assets\PlayerController.cs" />
+     <Compile Include="Assets\Script\CameraController.cs" />
+     <Compile Include="Assets\Script\EnemyAI.cs" />
+     <Compile Include="Assets\Script\EnemyGFX.cs" />
+     <Compile Include="Assets\Script\PlayerController.cs" />
  <Reference Include="Unity.Timeline.Editor">
  <HintPath>/home/silva/UnityGame2D/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
  </Reference>
@@ -270,7 +271,7 @@
  <HintPath>/home/silva/Unity/Hub/Editor/2019.2.2f1/Editor/Data/Managed/UnityEngine/UnityEngine.XRModule.dll</HintPath>
  </Reference>
  <Reference Include="Pathfinding.Ionic.Zip.Reduced">
- <HintPath>/home/silva/UnityGame2D/Assets/AstarPathfindingProject/Plugins/DotNetZip/Pathfinding.Ionic.Zip.Reduced.dll</HintPath>
+ <HintPath>/home/silva/UnityGame2D/Assets/Resource/AstarPathfindingProject/Plugins/DotNetZip/Pathfinding.Ionic.Zip.Reduced.dll</HintPath>
  </Reference>
  <Reference Include="netstandard">
  <HintPath>/home/silva/Unity/Hub/Editor/2019.2.2f1/Editor/Data/NetStandard/ref/2.0.0/netstandard.dll</HintPath>

@@ -55,9 +55,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\AstarPathfindingProject\PackageTools\Editor\EditorBase.cs" />
-     <Compile Include="Assets\AstarPathfindingProject\PackageTools\Editor\EditorGUIx.cs" />
-     <Compile Include="Assets\AstarPathfindingProject\PackageTools\Editor\EnumFlagDrawer.cs" />
+     <Compile Include="Assets\Resource\AstarPathfindingProject\PackageTools\Editor\EditorBase.cs" />
+     <Compile Include="Assets\Resource\AstarPathfindingProject\PackageTools\Editor\EditorGUIx.cs" />
+     <Compile Include="Assets\Resource\AstarPathfindingProject\PackageTools\Editor\EnumFlagDrawer.cs" />
  <Reference Include="UnityEditor.UI">
  <HintPath>/home/silva/UnityGame2D/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
  </Reference>
@@ -260,7 +260,7 @@
  <HintPath>/home/silva/Unity/Hub/Editor/2019.2.2f1/Editor/Data/PlaybackEngines/LinuxStandaloneSupport/UnityEditor.LinuxStandalone.Extensions.dll</HintPath>
  </Reference>
  <Reference Include="Pathfinding.Ionic.Zip.Reduced">
- <HintPath>/home/silva/UnityGame2D/Assets/AstarPathfindingProject/Plugins/DotNetZip/Pathfinding.Ionic.Zip.Reduced.dll</HintPath>
+ <HintPath>/home/silva/UnityGame2D/Assets/Resource/AstarPathfindingProject/Plugins/DotNetZip/Pathfinding.Ionic.Zip.Reduced.dll</HintPath>
  </Reference>
  <Reference Include="nunit.framework">
  <HintPath>/home/silva/UnityGame2D/Library/PackageCache/com.unity.ext.nunit@1.0.0/net35/unity-custom/nunit.framework.dll</HintPath>
