@@ -9,12 +9,14 @@ public class PlayerController : MonoBehaviour
     private Animator anim;
     private Collider2D coli;
     [SerializeField] private LayerMask ground;
+    [SerializeField] private float hurtForce = 10f;
     
-    private enum State { idle, running, jumping, falling };
+    private enum State { idle, running, jumping, falling, hurt };
     private State state = State.idle;
     public int cherries = 0 ;
     
-    private void onTriggerEnter2D(Collider2D collision){
+    private void OnTriggerEnter2D(Collider2D collision){
+        Debug.Log("Trigger: collider2D");
         if(collision.tag == "Collectable"){
             Destroy(collision.gameObject);
             cherries+=1;
@@ -53,12 +55,29 @@ public class PlayerController : MonoBehaviour
     }
     private void Update()
     {
-        Movement();
-        VelocitySwitch();
+        if(state!=State.hurt){
+            Movement();
+        }
+        AnimationState();
         anim.SetInteger("state", (int)state);
     }
 
-    private void VelocitySwitch(){
+    private void OnCollisionEnter2D(Collision2D other){
+        if(other.gameObject.tag=="Enemy"){
+            Destroy(other.gameObject);
+        }
+        else{
+            state = State.hurt;
+            if(other.gameObject.transform.position.x > transform.position.x){
+                rb.velocity = new Vector2(-hurtForce,rb.velocity.y);
+            }
+            else{
+                rb.velocity = new Vector2(hurtForce,rb.velocity.y);
+            }
+        }
+    }
+
+    private void AnimationState(){
         if (state == State.jumping)
         {
             if(rb.velocity.y < .1f)
