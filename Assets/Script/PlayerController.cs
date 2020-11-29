@@ -14,12 +14,16 @@ public class PlayerController : MonoBehaviour
     private enum State { idle, running, jumping, falling, hurt };
     private State state = State.idle;
     public int cherries = 0 ;
+    public int gems = 0;
     
     private void OnTriggerEnter2D(Collider2D collision){
-        Debug.Log("Trigger: collider2D");
         if(collision.tag == "Collectable"){
             Destroy(collision.gameObject);
             cherries+=1;
+        }
+        if(collision.tag == "Gem"){
+            Destroy(collision.gameObject);
+            gems+=1;
         }
     }
 
@@ -49,9 +53,13 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetButtonDown("Jump") && coli.IsTouchingLayers(ground))
         {
-            rb.velocity = new Vector2(rb.velocity.x, 10f);
-            state = State.jumping;
+            Jump();
         }
+    }
+
+    private void Jump(){
+        rb.velocity = new Vector2(rb.velocity.x, 10f);
+        state = State.jumping;
     }
     private void Update()
     {
@@ -59,20 +67,25 @@ public class PlayerController : MonoBehaviour
             Movement();
         }
         AnimationState();
+        Debug.Log("state: " + state);
         anim.SetInteger("state", (int)state);
     }
 
     private void OnCollisionEnter2D(Collision2D other){
         if(other.gameObject.tag=="Enemy"){
-            Destroy(other.gameObject);
-        }
-        else{
-            state = State.hurt;
-            if(other.gameObject.transform.position.x > transform.position.x){
-                rb.velocity = new Vector2(-hurtForce,rb.velocity.y);
+            if(state == State.falling){
+                Destroy(other.gameObject);
+                Jump();
             }
             else{
-                rb.velocity = new Vector2(hurtForce,rb.velocity.y);
+                state = State.hurt;
+                // anim.SetInteger("state", (int)state);
+                if(other.gameObject.transform.position.x > transform.position.x){
+                    rb.velocity = new Vector2(-hurtForce,rb.velocity.y);
+                }
+                else{
+                    rb.velocity = new Vector2(hurtForce,rb.velocity.y);
+                }
             }
         }
     }
@@ -89,6 +102,13 @@ public class PlayerController : MonoBehaviour
         else if (state == State.falling)
         {
             if (coli.IsTouchingLayers(ground))
+            {
+                state = State.idle;
+            }
+        }
+        else if (state == State.hurt)
+        {
+            if(Mathf.Abs(rb.velocity.x) <.1f)
             {
                 state = State.idle;
             }

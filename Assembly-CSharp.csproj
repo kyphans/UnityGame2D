@@ -58,6 +58,7 @@
      <Compile Include="Assets\Script\CameraController.cs" />
      <Compile Include="Assets\Script\EnemyAI.cs" />
      <Compile Include="Assets\Script\EnemyGFX.cs" />
+     <Compile Include="Assets\Script\FrogController.cs" />
      <Compile Include="Assets\Script\PlayerController.cs" />
  <Reference Include="Unity.Timeline.Editor">
  <HintPath>C:/Users/Administrator/Documents/GitHub/UnityGame2D/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
