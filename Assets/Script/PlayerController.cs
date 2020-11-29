@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random=UnityEngine.Random;
 
 public class PlayerController : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class PlayerController : MonoBehaviour
     private State state = State.idle;
     public int cherries = 0 ;
     public int gems = 0;
+    private SpwanObjectRandom spwanObjectRandom;
     
     private void OnTriggerEnter2D(Collider2D collision){
         if(collision.tag == "Collectable"){
@@ -32,6 +34,12 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         coli = GetComponent<Collider2D>();
+        spwanObjectRandom = GetComponent<SpwanObjectRandom>();
+
+        // Instantiate diamond
+        // Instantiate(diamond,Random.insideUnitSphere * 10 + transform.position,   Quaternion.identity);
+        spwanObjectRandom.SpawnThing();
+        spwanObjectRandom.SpawnThing();
     }
 
     // Update is called once per frame
