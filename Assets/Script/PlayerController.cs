@@ -45,9 +45,6 @@ public class PlayerController : MonoBehaviour
         anim = GetComponent<Animator>();
         coli = GetComponent<Collider2D>();
         spwanObjectRandom = GetComponent<SpwanObjectRandom>();
-
-        // Instantiate diamond
-        // Instantiate(diamond,Random.insideUnitSphere * 10 + transform.position,   Quaternion.identity);
         spwanObjectRandom.SpawnThing();
         spwanObjectRandom.SpawnThing();
 
@@ -79,9 +76,8 @@ public class PlayerController : MonoBehaviour
             Jump();
         }
         
-        Debug.Log("Reach End Level:" + Vector2.Distance(transform.position, gatePos.transform.position));
-
         if(Vector2.Distance(transform.position, gatePos.transform.position)<=1){
+            Debug.Log("True:");
             cherryText.text = "" + cherries;
             gemText.text = "" + gems;
             hurtText.text = "" + hurts;
@@ -144,7 +140,6 @@ public class PlayerController : MonoBehaviour
             {
                 state = State.idle;
             }
-            hurts++;
             if (hurts>=10)
             {
                 gameOver.SetActive(true);
