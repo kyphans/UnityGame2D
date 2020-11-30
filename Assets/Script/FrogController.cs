@@ -8,16 +8,16 @@ public class FrogController : MonoBehaviour
     [SerializeField] private float leftCap;
     [SerializeField] private float rightCap;
     private Animator anim;
-
     private Rigidbody2D rb;
     private bool facingLeft = true;
     [SerializeField] private LayerMask ground;
-    [SerializeField] private float jumpLength;
-    [SerializeField] private float jumpHeight;
+    [SerializeField] private float jumpLength = 10f;
+    [SerializeField] private float jumpHeight = 15f;
     private Collider2D coll;
 
     void Start()
     {
+        anim = GetComponent<Animator>();
         coll = GetComponent<Collider2D>();
         rb = GetComponent<Rigidbody2D>();
     }
@@ -35,6 +35,7 @@ public class FrogController : MonoBehaviour
 
                     if (coll.IsTouchingLayers(ground));
                     {
+                        Debug.Log("Hit ground!");
                         rb.velocity = new Vector2(-jumpLength, jumpLength);
                         anim.SetBool("Jumping",true);
                     }
@@ -64,6 +65,7 @@ public class FrogController : MonoBehaviour
         }
     void Update()
     {
+        // Move();
         if(anim.GetBool("Jumping")){
             if(rb.velocity.y < .1){
                 anim.SetBool("Falling", true);

@@ -11,11 +11,16 @@ public class PlayerController : MonoBehaviour
     private Collider2D coli;
     [SerializeField] private LayerMask ground;
     [SerializeField] private float hurtForce = 10f;
+    private Transform gatePos;
+
     
     private enum State { idle, running, jumping, falling, hurt };
     private State state = State.idle;
     public int cherries = 0 ;
     public int gems = 0;
+    public int hurts = 0;
+    public GameObject gameOver;
+    public GameObject dialogInfo;
     private SpwanObjectRandom spwanObjectRandom;
     
     private void OnTriggerEnter2D(Collider2D collision){
@@ -34,6 +39,7 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         coli = GetComponent<Collider2D>();
+        // gatePos = Vector2(77,-5);
         spwanObjectRandom = GetComponent<SpwanObjectRandom>();
 
         // Instantiate diamond
@@ -63,6 +69,10 @@ public class PlayerController : MonoBehaviour
         {
             Jump();
         }
+
+        // if(transform.position==gatePos){
+        //     dialogInfo.SetActive(true);
+        // }
     }
 
     private void Jump(){
@@ -75,7 +85,6 @@ public class PlayerController : MonoBehaviour
             Movement();
         }
         AnimationState();
-        Debug.Log("state: " + state);
         anim.SetInteger("state", (int)state);
     }
 
@@ -87,6 +96,7 @@ public class PlayerController : MonoBehaviour
             }
             else{
                 state = State.hurt;
+                hurts++;
                 // anim.SetInteger("state", (int)state);
                 if(other.gameObject.transform.position.x > transform.position.x){
                     rb.velocity = new Vector2(-hurtForce,rb.velocity.y);
@@ -120,6 +130,11 @@ public class PlayerController : MonoBehaviour
             {
                 state = State.idle;
             }
+            hurts++;
+            if (hurts>=10)
+            {
+                gameOver.SetActive(true);
+            }
         }
 
         else if (Mathf.Abs(rb.velocity.x)  > 2f)
@@ -132,4 +147,5 @@ public class PlayerController : MonoBehaviour
             state = State.idle;
         }
     }
+
 }
