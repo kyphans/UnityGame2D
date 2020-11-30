@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Random=UnityEngine.Random;
 
 public class PlayerController : MonoBehaviour
@@ -11,7 +12,7 @@ public class PlayerController : MonoBehaviour
     private Collider2D coli;
     [SerializeField] private LayerMask ground;
     [SerializeField] private float hurtForce = 10f;
-    private Transform gatePos;
+    public GameObject gatePos;
 
     
     private enum State { idle, running, jumping, falling, hurt };
@@ -19,6 +20,10 @@ public class PlayerController : MonoBehaviour
     public int cherries = 0 ;
     public int gems = 0;
     public int hurts = 0;
+
+    public Text cherryText;
+    public Text gemText;
+    public Text hurtText;
     public GameObject gameOver;
     public GameObject dialogInfo;
     private SpwanObjectRandom spwanObjectRandom;
@@ -39,13 +44,17 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         coli = GetComponent<Collider2D>();
-        // gatePos = Vector2(77,-5);
         spwanObjectRandom = GetComponent<SpwanObjectRandom>();
 
         // Instantiate diamond
         // Instantiate(diamond,Random.insideUnitSphere * 10 + transform.position,   Quaternion.identity);
         spwanObjectRandom.SpawnThing();
         spwanObjectRandom.SpawnThing();
+
+        cherryText = dialogInfo.transform.Find("CherryNum").GetComponent<Text>();
+        gemText = dialogInfo.transform.Find("GemNum").GetComponent<Text>();
+        hurtText = dialogInfo.transform.Find("HurtNum").GetComponent<Text>();
+
     }
 
     // Update is called once per frame
@@ -69,10 +78,15 @@ public class PlayerController : MonoBehaviour
         {
             Jump();
         }
+        
+        Debug.Log("Reach End Level:" + Vector2.Distance(transform.position, gatePos.transform.position));
 
-        // if(transform.position==gatePos){
-        //     dialogInfo.SetActive(true);
-        // }
+        if(Vector2.Distance(transform.position, gatePos.transform.position)<=1){
+            cherryText.text = "" + cherries;
+            gemText.text = "" + gems;
+            hurtText.text = "" + hurts;
+            dialogInfo.SetActive(true);
+        }
     }
 
     private void Jump(){
