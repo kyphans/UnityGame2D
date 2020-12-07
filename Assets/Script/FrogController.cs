@@ -14,12 +14,14 @@ public class FrogController : MonoBehaviour
     [SerializeField] private float jumpLength = 10f;
     [SerializeField] private float jumpHeight = 15f;
     private Collider2D coll;
+    // private float oldPos;
 
     void Start()
     {
         anim = GetComponent<Animator>();
         coll = GetComponent<Collider2D>();
         rb = GetComponent<Rigidbody2D>();
+        // old_pos = transform.position.x;
     }
 
     // Update is called once per frame
@@ -30,25 +32,29 @@ public class FrogController : MonoBehaviour
                 {
                     if (transform.localScale.x != 1)
                     {
+                        Debug.Log("transform.localScale !1");
                         transform.localScale = new Vector3(1,1);
                     }
 
                     if (coll.IsTouchingLayers(ground));
                     {
-                        Debug.Log("Hit ground!");
+                        Debug.Log("> leftCap && Hit ground!");
                         rb.velocity = new Vector2(-jumpLength, jumpLength);
                         anim.SetBool("Jumping",true);
                     }
                 }
                 else{
+                    Debug.Log("transform.position.x > leftCap");
                     facingLeft = false;
                 }
             }
             else{
                 if (transform.position.x < rightCap)
                 {
-                    if (transform.localScale.x != 1)
+                    
+                    if (transform.localScale.x !=- 1)
                     {
+                        Debug.Log("transform.localScale" + transform.localScale.x);
                         transform.localScale = new Vector3(-1,1);
                     }
 
@@ -56,7 +62,15 @@ public class FrogController : MonoBehaviour
                     {
                         rb.velocity = new Vector2(jumpLength, jumpLength);
                         anim.SetBool("Jumping",true);
+                        // if(rb.velocity.magnitude == 0)
+                        // {
+                        //     Debug.Log("stop moving!");
+                        // }
+                        // else{
+                        //     Debug.Log("is moving!");
+                        // }
                     }
+                    Debug.Log("transform.position.x:"+ transform.position.x);  
                 }
                 else{
                     facingLeft = false;
@@ -65,7 +79,6 @@ public class FrogController : MonoBehaviour
         }
     void Update()
     {
-        // Move();
         if(anim.GetBool("Jumping")){
             if(rb.velocity.y < .1){
                 anim.SetBool("Falling", true);
