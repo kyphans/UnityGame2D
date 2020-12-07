@@ -11,9 +11,11 @@ public class PlayerController : MonoBehaviour
     private Animator anim;
     private Collider2D coli;
     [SerializeField] private LayerMask ground;
+    public GameObject gateSprite;
+    [SerializeField] private LayerMask gateLayer;
     [SerializeField] private float hurtForce = 10f;
     public GameObject gatePos;
-
+    public int numSpawnGen;
     
     private enum State { idle, running, jumping, falling, hurt };
     private State state = State.idle;
@@ -45,9 +47,10 @@ public class PlayerController : MonoBehaviour
         anim = GetComponent<Animator>();
         coli = GetComponent<Collider2D>();
         spwanObjectRandom = GetComponent<SpwanObjectRandom>();
-        spwanObjectRandom.SpawnThing();
-        spwanObjectRandom.SpawnThing();
-
+        for (int i = 0; i < numSpawnGen; i++) 
+        {
+            spwanObjectRandom.SpawnThing();
+        }
         cherryText = dialogInfo.transform.Find("CherryNum").GetComponent<Text>();
         gemText = dialogInfo.transform.Find("GemNum").GetComponent<Text>();
         hurtText = dialogInfo.transform.Find("HurtNum").GetComponent<Text>();
@@ -77,11 +80,18 @@ public class PlayerController : MonoBehaviour
         }
         
         if(Vector2.Distance(transform.position, gatePos.transform.position)<=1){
-            Debug.Log("True:");
+
             cherryText.text = "" + cherries;
             gemText.text = "" + gems;
             hurtText.text = "" + hurts;
+            gateSprite.SetActive(true);
+        }
+        if(coli.IsTouchingLayers(gateLayer)){
             dialogInfo.SetActive(true);
+        }
+        if(transform.position.y < -10f){
+            rb.gravityScale =0;
+            gameOver.SetActive(true);
         }
     }
 

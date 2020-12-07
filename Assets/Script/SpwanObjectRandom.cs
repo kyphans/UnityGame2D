@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class SpwanObjectRandom : MonoBehaviour
 {
-    public float spawnDistance = 5f; // how far away to try and spawn
+    public float startDistance;
+    public float endDistance;
     public int groundCheckStepCount = 5; // how many intermediate raycasts to do
     public Transform playerTransform; // location of the player (or thing doing the spawning)
-    public float spawnHeight = 1f; // height above the player to start raycasting
     public float rayLength = 3f; // distance downward to extend the ray
     public LayerMask layersToHit; // layers to hit (set to ground layer probably)
     public GameObject thingToSpawn; // object to spawn
@@ -36,9 +36,11 @@ public class SpwanObjectRandom : MonoBehaviour
         for (int i = 0; i <= raycastCount; i++)
         {
             float percentage =  (float)i / raycastCount;
-            float interpolationValue = towardsPlayerFromMaxDistance ? (1 - percentage) : percentage; // invert percentage if necessary
+            float interpolationValue = towardsPlayerFromMaxDistance ? (1 - percentage) : percentage; 
+            // invert percentage if necessary
  
             // interpolate between min/max distance
+            float spawnDistance = Random.Range(startDistance, endDistance);
             float distance = Mathf.Lerp(0, spawnDistance, interpolationValue);
             RaycastHit2D hit2D = RaycastDownAtDistance(distance);
  
@@ -61,8 +63,10 @@ public class SpwanObjectRandom : MonoBehaviour
     /// </summary>
     public RaycastHit2D RaycastDownAtDistance(float distance)
     {
-        Vector3 origin = playerTransform.position + new Vector3(distance, spawnHeight);
+        Vector3 origin = playerTransform.position + new Vector3(distance, 1);
         Ray ray = new Ray(origin, Vector3.down);
         return Physics2D.Raycast(ray.origin, ray.direction, rayLength, layersToHit);
     }
+
+    
 }
