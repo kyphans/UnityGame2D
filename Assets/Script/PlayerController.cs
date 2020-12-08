@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     private Animator anim;
     private Collider2D coli;
+    private AudioController audioControl;
     [SerializeField] private LayerMask ground;
     public GameObject gateSprite;
     [SerializeField] private LayerMask gateLayer;
@@ -32,10 +33,13 @@ public class PlayerController : MonoBehaviour
     
     private void OnTriggerEnter2D(Collider2D collision){
         if(collision.tag == "Collectable"){
+            Debug.Log("Trigger Collectabe");
+            audioControl.PlayCollectDiamond();
             Destroy(collision.gameObject);
             cherries+=1;
         }
         if(collision.tag == "Gem"){
+            audioControl.PlayCollectDiamond();
             Destroy(collision.gameObject);
             gems+=1;
         }
@@ -43,6 +47,7 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
+        audioControl = GetComponent<AudioController>();
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         coli = GetComponent<Collider2D>();
@@ -98,6 +103,7 @@ public class PlayerController : MonoBehaviour
     private void Jump(){
         rb.velocity = new Vector2(rb.velocity.x, 10f);
         state = State.jumping;
+        audioControl.PlayJump();
     }
     private void Update()
     {
@@ -111,6 +117,7 @@ public class PlayerController : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D other){
         if(other.gameObject.tag=="Enemy"){
             if(state == State.falling){
+                audioControl.PlayAttack();
                 Destroy(other.gameObject);
                 Jump();
             }

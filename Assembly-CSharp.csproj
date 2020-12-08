@@ -55,8 +55,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\FrogControllerA.cs" />
-     <Compile Include="Assets\OpossumController.cs" />
      <Compile Include="Assets\Resource\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
      <Compile Include="Assets\Resource\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01_UGUI.cs" />
      <Compile Include="Assets\Resource\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark02.cs" />
@@ -90,16 +88,20 @@
      <Compile Include="Assets\Resource\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeB.cs" />
      <Compile Include="Assets\Resource\TextMesh Pro\Examples &amp; Extras\Scripts\VertexZoom.cs" />
      <Compile Include="Assets\Resource\TextMesh Pro\Examples &amp; Extras\Scripts\WarpTextExample.cs" />
+     <Compile Include="Assets\Script\AudioController.cs" />
      <Compile Include="Assets\Script\ButtonController.cs" />
      <Compile Include="Assets\Script\CameraController.cs" />
      <Compile Include="Assets\Script\EnemyAI.cs" />
      <Compile Include="Assets\Script\EnemyGFX.cs" />
      <Compile Include="Assets\Script\FrogController.cs" />
+     <Compile Include="Assets\Script\FrogControllerA.cs" />
      <Compile Include="Assets\Script\GameOverScript.cs" />
      <Compile Include="Assets\Script\GobalValue.cs" />
+     <Compile Include="Assets\Script\OpossumController.cs" />
+     <Compile Include="Assets\Script\PlayAudio.cs" />
      <Compile Include="Assets\Script\PlayerController.cs" />
      <Compile Include="Assets\Script\SpwanObjectRandom.cs" />
-     <Compile Include="Assets\SpwanThingController.cs" />
+     <Compile Include="Assets\Script\SpwanThingController.cs" />
      <None Include="Assets\Resource\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
      <None Include="Assets\Resource\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />
      <None Include="Assets\Resource\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
