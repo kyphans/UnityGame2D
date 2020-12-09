@@ -96,6 +96,7 @@
      <Compile Include="Assets\Script\FrogController.cs" />
      <Compile Include="Assets\Script\FrogControllerA.cs" />
      <Compile Include="Assets\Script\GameOverScript.cs" />
+     <Compile Include="Assets\Script\GateController.cs" />
      <Compile Include="Assets\Script\GobalValue.cs" />
      <Compile Include="Assets\Script\OpossumController.cs" />
      <Compile Include="Assets\Script\PlayAudio.cs" />

@@ -10,6 +10,9 @@ TagManager:
   - Wall Left
   - Wall Right
   - Gate
+  - Ground
+  - Block
+  - EndLevel
   layers:
   - Default
   - TransparentFX
